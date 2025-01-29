@@ -1,4 +1,7 @@
-# Pizza-Sales-Analysis
+# Data-Driven Pizza Chain Optimization
+
+![image](https://github.com/user-attachments/assets/db86159d-c67b-4f10-8565-bc2b0df90628)
+
 
 ## Overview
 This project involves a comprehensive analysis of a pizza business's sales data for the year 2015. Using SQL for data extraction and transformation and Tableau for visualization, the project highlights key performance metrics and trends to uncover actionable insights.
