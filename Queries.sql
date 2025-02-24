@@ -127,3 +127,36 @@ FROM pizza_sales
 GROUP BY pizza_name
 ORDER BY Total_order 
 LIMIT 5;
+
+-- Rolling 7-Day Average of Total Revenue
+SELECT 
+    order_date, 
+    SUM(total_price) AS Daily_Revenue,
+    AVG(SUM(total_price)) OVER (ORDER BY order_date ROWS BETWEEN 6 PRECEDING AND CURRENT ROW) AS Rolling_7_Day_Avg_Revenue
+FROM pizza_sales
+GROUP BY order_date
+ORDER BY order_date;
+
+-- Year-over-Year (YoY) Comparison of Sales Revenue
+SELECT 
+    pizza_category, 
+    YEAR(order_date) AS Order_Year,
+    SUM(total_price) AS Total_Sales,
+    LAG(SUM(total_price), 1) OVER (PARTITION BY pizza_category ORDER BY YEAR(order_date)) AS Previous_Year_Sales,
+    (SUM(total_price) - LAG(SUM(total_price), 1) OVER (PARTITION BY pizza_category ORDER BY YEAR(order_date))) / 
+    LAG(SUM(total_price), 1) OVER (PARTITION BY pizza_category ORDER BY YEAR(order_date)) * 100 AS YoY_Growth_Percentage
+FROM pizza_sales
+GROUP BY pizza_category, YEAR(order_date)
+ORDER BY pizza_category, Order_Year;
+
+-- Customer Retention Rate (Repeat Customers)
+SELECT 
+    pizza_category, 
+    YEAR(order_date) AS Order_Year,
+    SUM(total_price) AS Total_Sales,
+    LAG(SUM(total_price), 1) OVER (PARTITION BY pizza_category ORDER BY YEAR(order_date)) AS Previous_Year_Sales,
+    (SUM(total_price) - LAG(SUM(total_price), 1) OVER (PARTITION BY pizza_category ORDER BY YEAR(order_date))) / 
+    LAG(SUM(total_price), 1) OVER (PARTITION BY pizza_category ORDER BY YEAR(order_date)) * 100 AS YoY_Growth_Percentage
+FROM pizza_sales
+GROUP BY pizza_category, YEAR(order_date)
+ORDER BY pizza_category, Order_Year;
