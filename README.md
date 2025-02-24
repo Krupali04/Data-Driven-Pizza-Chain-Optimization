@@ -19,7 +19,7 @@ Category and Size Insights: Breakdown of sales across pizza categories and sizes
 Business Impact:
 The dashboards and data analysis provided critical insights to enhance product offerings, optimize pricing, improve inventory management, and streamline supply chain processes, leading to increased operational efficiency and customer satisfaction.
 
-Installation:
+### Installation:
 To replicate or use the project, follow these steps:
 
 Clone this repository.
